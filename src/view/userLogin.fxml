@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Group xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.UserLoginController">
+<children><AnchorPane id="AnchorPane" layoutX="19.0" layoutY="13.0" prefHeight="354.0" prefWidth="367.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-style: solid; -fx-border-width: 2; -fx-border-color: gray; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-border-radius: 10; -fx-background-size: 100% 100%;">
+<children><ImageView fitHeight="345.0" fitWidth="360.0" layoutX="2.0" layoutY="4.0" opacity="0.49" pickOnBounds="true">
+<image>
+<Image url="@../gambar/login.jpg" />
+</image></ImageView>
+<Pane layoutX="35.0" layoutY="32.0">
+<children><Button layoutX="203.0" layoutY="233.0" mnemonicParsing="false" onAction="#actionLogin" prefHeight="25.0" prefWidth="94.0" styleClass="custem-button-input" stylesheets="@../css/baju.css" text="Login" textFill="WHITE">
+<font>
+<Font name="System Bold" size="14.0" />
+</font></Button><Label text="Login App">
+<font>
+<Font name="Arial" size="45.0" />
+</font>
+<effect>
+<Reflection fraction="0.63" topOpacity="0.15" />
+</effect></Label><ComboBox fx:id="cmbAdmin" layoutY="176.0" prefHeight="30.0" prefWidth="297.0" promptText="Selecione um Item" visibleRowCount="2" /><Button layoutX="99.0" layoutY="233.0" mnemonicParsing="false" onAction="#actionSair" prefHeight="25.0" prefWidth="94.0" styleClass="custem-button-input" stylesheets="@../css/baju.css" text="Sair" textFill="WHITE">
+<font>
+<Font name="System Bold" size="14.0" />
+</font>
+</Button><PasswordField fx:id="txtPass" layoutY="133.0" prefHeight="30.0" prefWidth="297.0" promptText="Password">
+<font>
+<Font size="14.0" />
+</font></PasswordField><TextField fx:id="fieldUserName" layoutY="89.0" prefHeight="30.0" prefWidth="297.0" promptText="Username">
+<font>
+<Font size="14.0" />
+</font></TextField>
+</children>
+</Pane>
+</children></AnchorPane><Button layoutX="373.1875" layoutY="5.5" mnemonicParsing="false" onAction="#actionSair" prefHeight="20.0" prefWidth="20.0" style="-fx-background-image: url(&quot;/gambar/closePage.png&quot;); -fx-background-size: 100% 100%;">
+<font>
+<Font size="8.0" />
+</font></Button>
+</children>
+</Group>
