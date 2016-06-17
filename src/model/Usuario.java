@@ -1,51 +1,56 @@
 package model;
 
-import javax.persistence.Column;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="tb_usuario")
 public class Usuario {
+	
+	@Id
+	private long idUsuario;
+	
+	private String nome;
+	private String senha;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY,
+			   mappedBy="emprestimoID.usuario")
+	private List<Emprestimo> emprestimoItems = new ArrayList<Emprestimo>();
 
 	
-	private long CPF;
-	private String nome;
-	private int debito;
-	@Column(name="senha")
-	private String senha;
-	public Usuario() {}
-	public Usuario(long cPF, String nome, int debito, String senha) {
-		super();
-		CPF = cPF;
-		this.nome = nome;
-		this.debito = debito;
-		this.senha = senha;
+	public Usuario() { }
+	
+	public long getIdUsuario() {
+		return idUsuario;
 	}
-	@Id
-	@Column(name="CPF")
-	public long getCPF() {
-		return CPF;
+	
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-
-	public void setCPF(long cPF) {
-		CPF = cPF;
-	}
-
+	
 	public String getNome() {
 		return nome;
 	}
-
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	public int getDebito() {
-		return debito;
+	public List<Emprestimo> getEmprestimoItems() {
+		return emprestimoItems;
 	}
 
-	public void setDebito(int debito) {
-		this.debito = debito;
+	public void setEmprestimoItems(List<Emprestimo> emprestimoItems) {
+		this.emprestimoItems = emprestimoItems;
 	}
 
 	public String getSenha() {
@@ -55,5 +60,4 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
 }
