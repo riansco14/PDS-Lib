@@ -1,60 +1,119 @@
 package DAO;
 
-import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.EntityManager;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
 import model.Usuario;
 
-public class UsuarioDAO {
-	public void insert(Usuario usuario) {
-		Session session = HibernateManager.getSession();
-		Transaction tx = session.beginTransaction();
-		session.save(usuario);
-		tx.commit();
-		session.close();
+
+
+public class UsuarioDAO extends GenericDAO<Usuario> {
+
+	public Usuario localizar(String nome) {
+
+		EntityManager em = factory.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		Usuario usuario = null;
+		
+		try {
+
+			t.begin();
+			Query q = em.createQuery("from Usuario where nome like :nome");
+			q.setParameter("nome", nome);
+			usuario = (Usuario) q.getSingleResult();
+			t.commit();
+
+		} catch (Exception e) {
+
+			if (debugInfo) {
+				e.printStackTrace();
+			}
+			if (t.isActive()) t.rollback();
+
+		} finally {
+
+			em.close();
+		}
+
+		return usuario;
 	}
 
-	public void update(Usuario usuario) {
-		Session session = HibernateManager.getSession();
-		Transaction tx = session.beginTransaction();
-		session.update(usuario);
-		tx.commit();
-		session.close();
+	public boolean inserir(Usuario usuario) {
+
+		EntityManager em = factory.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		boolean result = false;
+		Usuario existentUsuario = null;
+		
+		try {
+
+			t.begin();
+
+			/* verifica se ja' existe um usuario com o mesmo nome */
+			Query q = em.createQuery("from Usuario where nome like :nome");
+			q.setParameter("nome", usuario.getNome());
+
+			try {
+				existentUsuario = (Usuario) q.getSingleResult();
+			} catch(Exception e) { }
+			
+			/* se nao existe o usuario, persiste */
+			if (existentUsuario == null) {
+				em.persist(usuario);
+			} else { /* ja' existe o usuario, somente retorna seu id */
+				usuario.setIdUsuario(existentUsuario.getIdUsuario());
+			}
+			
+			t.commit();
+			result = true;
+
+		} catch (Exception e) {
+
+			if (debugInfo) {
+				e.printStackTrace();
+			}
+			if (t.isActive()) t.rollback();
+
+		} finally {
+
+			em.close();
+
+		}
+
+		return result;
 	}
+	
+	public boolean update(long idUsuario, String senha) {
 
-	public void delete(long CPF) {
-		Session session = HibernateManager.getSession();
-		 Transaction tx = session.beginTransaction();
-		 Usuario usuario=new Usuario();
-		 usuario.setCPF(CPF);
-		 session.delete(usuario);
-		 usuario=null;
-		 tx.commit();
+		EntityManager em = factory.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		boolean result = false;
+		
+		try {
+
+			t.begin();
+			
+			Usuario a=em.find(Usuario.class, idUsuario);
+			a.setSenha(senha);
+			
+			
+			t.commit();
+			result = true;
+
+		} catch (Exception e) {
+
+			if (debugInfo) {
+				e.printStackTrace();
+			}
+			if (t.isActive()) t.rollback();
+
+		} finally {
+
+			em.close();
+
+		}
+
+		return result;
 	}
-
-	public List<Usuario> selectAll() {
-		Session session = HibernateManager.getSession();
-
-		List<Usuario> tmp = null;
-		Transaction tx = session.beginTransaction();
-		tmp = session.createCriteria(Usuario.class).list();
-		tx.commit();
-		session.close();
-		return tmp;
-	}
-
-	public Usuario select(long userCPF) {
-		Session session = HibernateManager.getSession();
-		Usuario tmp = null;
-		Serializable serializable=new Long(userCPF);
-		tmp=(Usuario) session.get(Usuario.class, serializable);
-		session.close();
-		return tmp;
-	}
-
 }
