@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.GerenciadorTelaController">
+<children><AnchorPane id="AnchorPane" fx:id="loadBaju" prefHeight="650.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-image: url(&quot;/gambar/grid.jpg&quot;);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<children><SplitPane dividerPositions="0.18454935622317598" focusTraversable="true" orientation="VERTICAL" prefHeight="633.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="17.0">
+  <items>
+    <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="124.0" prefWidth="998.0" style="-fx-background-image: url(&quot;/gambar/header.gif&quot;); -fx-background-size: 100% 100%;" SplitPane.resizableWithParent="false">
+<children><Label layoutX="30.0" layoutY="42.0" text="Gerenciador Biblioteca" textFill="#046272">
+<font>
+<Font name="Gill Sans MT" size="40.0" />
+</font>
+<effect>
+<Reflection topOpacity="0.2" />
+</effect></Label>
+<HBox layoutX="803.0" layoutY="70.0" spacing="10.0" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="70.0">
+<children><Label layoutX="803.0" layoutY="70.0" text="Login By  :" AnchorPane.bottomAnchor="26.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="70.0">
+<font>
+<Font size="14.0" />
+</font></Label><Label fx:id="lblAdmin" layoutX="872.0" layoutY="71.0" AnchorPane.bottomAnchor="26.0" AnchorPane.topAnchor="70.0">
+<font>
+<Font size="14.0" />
+</font></Label>
+</children>
+</HBox>
+</children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="418.0" prefWidth="676.0">
+<children><SplitPane dividerPositions="0.23393574297188754" focusTraversable="true" layoutX="602.0" layoutY="48.0" prefHeight="525.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <items>
+    <AnchorPane maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="230.0" style="-fx-background-color: white;" SplitPane.resizableWithParent="false">
+<children><Accordion prefHeight="305.0" prefWidth="230.0" AnchorPane.bottomAnchor="205.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <panes>
+    <TitledPane text="Livro">
+      <content>
+<StackPane>
+<children><ListView fx:id="listViewLivro" layoutX="-2.0" onMouseClicked="#clickListLivro" prefHeight="190.0" prefWidth="236.0" AnchorPane.bottomAnchor="23.0" AnchorPane.topAnchor="5.0" StackPane.alignment="CENTER">
+<StackPane.margin>
+<Insets bottom="-11.0" left="-12.0" right="-11.0" top="-11.0" />
+</StackPane.margin></ListView>
+</children>
+</StackPane>
+      </content>
+    </TitledPane>
+    <TitledPane text="Usuario">
+      <content>
+                                                <StackPane>
+                                                   <children>
+                                                      <ListView fx:id="listViewUsuario" onMouseClicked="#clickListUsuario" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="-11.0" left="-11.0" right="-11.0" top="-11.0" />
+                                                         </StackPane.margin>
+                                                      </ListView>
+                                                   </children>
+                                                </StackPane>
+      </content>
+    </TitledPane>
+    <TitledPane text="Exemplar">
+      <content>
+                                                <StackPane>
+                                                   <children>
+                                                      <ListView fx:id="listViewExemplar" prefHeight="196.0" prefWidth="233.0" StackPane.alignment="CENTER">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="-11.0" left="-11.0" right="-11.0" top="-11.0" />
+                                                         </StackPane.margin>
+                                                      </ListView>
+                                                   </children>
+                                                </StackPane>
+      </content>
+    </TitledPane>
+                                          <TitledPane text="Emprestimo">
+                                             <content>
+                                                <StackPane>
+                                                   <children>
+                                                      <ListView fx:id="listViewEmprestimo" onMouseClicked="#clickListEmprestimo" prefHeight="200.0" prefWidth="200.0" StackPane.alignment="CENTER">
+                                                         <StackPane.margin>
+                                                            <Insets bottom="-11.0" left="-11.0" right="-11.0" top="-11.0" />
+                                                         </StackPane.margin>
+                                                      </ListView>
+                                                   </children>
+                                                </StackPane>
+                                             </content>
+                                          </TitledPane>
+  </panes>
+</Accordion>
+</children></AnchorPane>
+<StackPane>
+<children><StackPane fx:id="workspace" prefHeight="150.0" prefWidth="200.0" />
+</children>
+</StackPane>
+  </items>
+</SplitPane>
+</children></AnchorPane>
+  </items>
+</SplitPane>
+</children></AnchorPane><MenuBar prefHeight="25.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+  <menus>
+    <Menu mnemonicParsing="false" text="File">
+      <items>
+        <MenuItem mnemonicParsing="false" onAction="#menuItemExit" text="Close" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Edit">
+      <items>
+        <MenuItem mnemonicParsing="false" text="Delete" />
+      </items>
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+      <items>
+        <MenuItem mnemonicParsing="false" text="About" />
+      </items>
+    </Menu>
+  </menus>
+<effect>
+<DropShadow />
+</effect>
+</MenuBar>
+</children>
+</AnchorPane>
