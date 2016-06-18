@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.UserCRUDController">
+   <children>
+      <Group layoutX="-1.0" layoutY="71.0">
+         <children>
+            <TableView fx:id="tabela" layoutX="33.0" layoutY="4.0" prefHeight="324.0" prefWidth="666.0" stylesheets="@../gambar/baju.css">
+               <columns>
+                  <TableColumn fx:id="colCPF" prefWidth="254.0" resizable="false" text="CPF" />
+                  <TableColumn fx:id="colNome" minWidth="0.0" prefWidth="403.0" text="Nome" />
+               </columns>
+            </TableView>
+            <HBox layoutX="34.0" layoutY="346.0" spacing="10.0">
+               <children>
+                  <Button layoutX="34.0" layoutY="366.0" mnemonicParsing="false" onAction="#actionDeletar" prefHeight="31.0" prefWidth="74.0" style="-fx-text-fill: white;" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Deletar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="149.0" layoutY="366.0" mnemonicParsing="false" onAction="#actionModificar" prefHeight="31.0" prefWidth="131.0" style="-fx-text-fill: white;" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Modificar Senha">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="265.0" layoutY="366.0" mnemonicParsing="false" onAction="#actionSearch" prefHeight="31.0" prefWidth="74.0" style="-fx-text-fill: white;" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Pesquisar">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <TextField fx:id="fieldSearch" layoutX="418.0" layoutY="349.0" prefHeight="25.0" prefWidth="280.0" promptText="Pesquisa" />
+            <Region layoutX="34.0" layoutY="-14.0" prefHeight="16.0" prefWidth="677.0" />
+            <Region layoutX="20.0" layoutY="2.0" prefHeight="386.0" prefWidth="12.0" />
+         </children>
+      </Group>
+   </children>
+</AnchorPane>
