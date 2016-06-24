@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.LivroCrudController">
+   <children>
+      <Group layoutX="-1.0" layoutY="71.0">
+         <children>
+            <TableView fx:id="tabela" layoutX="62.0" layoutY="153.0" prefHeight="161.0" prefWidth="608.0" stylesheets="@../gambar/baju.css">
+               <columns>
+                  <TableColumn fx:id="colCPF" prefWidth="193.0" resizable="false" text="ISBN" />
+                  <TableColumn fx:id="colNome" minWidth="6.0" prefWidth="470.0" text="Titulo" />
+               </columns>
+            </TableView>
+         </children>
+      </Group>
+      <HBox layoutX="145.0" layoutY="88.0" spacing="30.0">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="302.0" promptText="Digite o CPF do Usuario">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Buscar Usuario" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Label layoutX="278.0" layoutY="181.0" text="Lista de Usuarios">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

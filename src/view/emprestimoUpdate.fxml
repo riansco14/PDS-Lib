@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="control.EmprestimoUpdateController">
+   <children>
+      <Label layoutX="275.0" layoutY="167.0" text="Lista de Usuarios">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button layoutX="297.0" layoutY="413.0" mnemonicParsing="false" onAction="#actionDevolver" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Devolver Livro" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <Group layoutX="9.0" layoutY="81.0">
+         <children>
+            <TableView fx:id="tabela" layoutX="48.0" layoutY="139.0" prefHeight="161.0" prefWidth="608.0" stylesheets="@../gambar/baju.css">
+               <columns>
+                  <TableColumn fx:id="colISBN" prefWidth="193.0" resizable="false" text="ISBN" />
+                  <TableColumn fx:id="colTitulo" minWidth="6.0" prefWidth="470.0" text="Titulo" />
+               </columns>
+            </TableView>
+         </children>
+      </Group>
+      <HBox layoutX="140.0" layoutY="86.0" spacing="30.0">
+         <children>
+            <TextField fx:id="fieldCPF" prefHeight="25.0" prefWidth="302.0" promptText="Digite o CPF do Usuario">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Button mnemonicParsing="false" onAction="#actionSearch" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Buscar Usuario" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
