@@ -3,7 +3,6 @@ package control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import VO.BibliotecaNegocio;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -13,12 +12,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import model.Usuario;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
+import util.ValidationField;
 
 public class UserCadastroController implements Initializable{
 	@FXML TextField fieldNome;
 	@FXML TextField fieldCPF;
 	@FXML TextField fieldSenha;
 	@FXML TextField fieldSenha2;
+	BibliotecaNegocio negocio=new BibliotecaNegocio();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -38,7 +41,9 @@ public class UserCadastroController implements Initializable{
 	
 	@FXML
 	public void actionCadastrar(ActionEvent event) {
-		BibliotecaNegocio negocio=new BibliotecaNegocio();
+		boolean fieldIsEmpty=ValidationField.isEmptyAllFields(fieldCPF,fieldNome,fieldSenha,fieldSenha2);
+		if(fieldIsEmpty) return;
+		
 		if(fieldSenha.getText().equals(fieldSenha2.getText())){
 			Usuario usuario=new Usuario();
 			usuario.setIdUsuario(Long.parseLong(fieldCPF.getText()));
@@ -46,7 +51,10 @@ public class UserCadastroController implements Initializable{
 			usuario.setSenha(fieldSenha.getText());
 			
 			if(negocio.cadastrarUsuario(usuario))
-				System.out.println("cadastrad");
+				Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Usuario inserido com sucesso");
+			else
+				Dialogs.showError("Houve algum problema na Transação", "Error", "Usuario não foi inserido");
+		
 		}
 		
 		

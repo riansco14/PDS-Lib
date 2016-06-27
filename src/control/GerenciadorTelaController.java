@@ -6,8 +6,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import VO.Location;
-import br.com.App.Main;
+import App.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,20 +27,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import util.Dialogs;
+import util.Location;
 
 public class GerenciadorTelaController implements Initializable{
     @FXML     private StackPane workspace;
     @FXML     private Label lblAdmin;
     @FXML     private ListView<String> listViewLivro;
     @FXML     private ListView<String> listViewUsuario;
-    @FXML     private ListView<String> listViewExemplar;
     @FXML     private ListView<String> listViewEmprestimo;
     @FXML     private final ObservableList<String> listLivro = FXCollections.observableArrayList("Adicionar Livro",
-            "Manipular Livro");
+            "Manipular Livro","Manipular Exemplar");
     @FXML     private final ObservableList<String> listUsuario = FXCollections.observableArrayList("Adicionar Usuario",
             "Manipular Usuario");
-    @FXML     private final ObservableList<String> listExemplar = FXCollections.observableArrayList("Adicionar Exemplar",
-            "Manipular Exemplar");
     @FXML     private final ObservableList<String> listEmprestimo = FXCollections.observableArrayList("Retirar Livro",
             "Devolver Livro","Emprestimos por Usuario","Emprestimos por Livro");
     
@@ -68,7 +66,6 @@ public class GerenciadorTelaController implements Initializable{
         listViewLivro.setItems(listLivro);
         listViewUsuario.setItems(listUsuario);
         listViewEmprestimo.setItems(listEmprestimo);
-        listViewExemplar.setItems(listExemplar);
         
         try {
 			nodeCRUDLivro=FXMLLoader.load(getClass().getResource(Location.TELA_LIVRO_CRUD.toString()));
@@ -91,9 +88,8 @@ public class GerenciadorTelaController implements Initializable{
     @FXML 
     private void menuItemExit(ActionEvent event) {
     	Stage stage =(Stage) workspace.getScene().getWindow();
-    	Alert alert=new Alert(AlertType.CONFIRMATION," Bolsonaro",ButtonType.OK,ButtonType.APPLY);
     	
-    	if(alert.showAndWait().get()==ButtonType.APPLY)
+    	if(Dialogs.showConfirmation("Confirmação", "Deseja sair ? ", "Clique em OK se quiser sair"))
     		stage.close();
     }
     
@@ -108,6 +104,10 @@ public class GerenciadorTelaController implements Initializable{
 
             case 1:{
             	setStageWorkspace(nodeCRUDLivro);
+            }
+            break;
+            case 2:{
+            	setStageWorkspace(nodeCRUDEstoque);
             }
             break;
         }    
@@ -142,20 +142,10 @@ public class GerenciadorTelaController implements Initializable{
             	setStageWorkspace(nodeEmprestimoUpdate);
             }
             break;
-            case 2:{
-            	setStageWorkspace(nodeCRUDEstoque);
-            }
-            break;
         }    
         
     }
     
-    @FXML 
-    private void clickListExemplar(MouseEvent event) throws IOException{
-        switch(listViewExemplar.getSelectionModel().getSelectedIndex()){
-
-        }    
-        
-    }
+    
     
 }

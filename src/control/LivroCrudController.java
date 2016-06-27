@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import DAO.LivroDAO;
-import VO.BibliotecaNegocio;
 import control.ExemplarCRUDController.LivroPropriety;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -27,6 +26,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.Categoria;
 import model.Editora;
 import model.Livro;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
 
 public class LivroCrudController implements Initializable {
 
@@ -73,16 +74,13 @@ public class LivroCrudController implements Initializable {
 	}
 	@FXML
 	public void actionDeletar(ActionEvent event) {
-		Alert alert=new Alert(AlertType.CONFIRMATION);
-		alert.setContentText("Deseja Excluir esse Livro ?");
-		Optional<ButtonType> tmp=alert.showAndWait();
-		if(tmp.get()==ButtonType.OK){
+		if(Dialogs.showConfirmation("Confirmação", "Escolha uma opção", "Deseja Excluir esse Livro ?")){
 			String isbn=tabela.getSelectionModel().getSelectedItem().getIsbn();
-			if(negocio.excluirLivro(isbn)){
-				alert=new Alert(AlertType.INFORMATION);
-				alert.setContentText("Livro Excluido");
-				alert.showAndWait();
-			}
+		
+			if(negocio.excluirLivro(isbn))
+				Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Livro Excluido com sucesso");
+			else
+				Dialogs.showError("Houve algum problema na Transação", "Error", "Seu Livro não foi excluido");
 		}
 	
 		

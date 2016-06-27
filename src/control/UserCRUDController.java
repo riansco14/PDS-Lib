@@ -26,7 +26,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Livro;
 import model.Usuario;
-import VO.BibliotecaNegocio;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
 import control.LivroCrudController.LivroPropriety;
 
 public class UserCRUDController implements Initializable {
@@ -51,16 +52,15 @@ public class UserCRUDController implements Initializable {
 	}
 	@FXML
 	public void actionDeletar(ActionEvent event) {
-		Alert alert=new Alert(AlertType.CONFIRMATION);
-		alert.setContentText("Deseja Excluir esse Usuario Permanentemente ?");
-		Optional<ButtonType> tmp=alert.showAndWait();
-		if(tmp.get()==ButtonType.OK){
+		
+		if(Dialogs.showConfirmation("Confirmação", "Escolha uma opção", "Deseja Excluir esse Usuario Permanentemente ?")){
 			long cpf=tabela.getSelectionModel().getSelectedItem().getCPF();
-			if(negocio.excluirUsuario(cpf)){
-				alert=new Alert(AlertType.INFORMATION);
-				alert.setContentText("Usuario Excluido");
-				alert.showAndWait();
-			}
+			
+			if(negocio.excluirUsuario(cpf))
+				Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Usuario Excluido com sucesso");
+			else
+				Dialogs.showError("Houve algum problema na Transação", "Error", "Usuario não foi excluido");
+		
 		}
 	}
 
@@ -97,25 +97,17 @@ public class UserCRUDController implements Initializable {
 			String nome=tabela.getSelectionModel().getSelectedItem().getNome();
 			long CPF=tabela.getSelectionModel().getSelectedItem().getCPF();
 			
-			TextInputDialog dialog = new TextInputDialog();
-			dialog.setTitle("Modificar Senha");
-			dialog.setHeaderText("Modificar Senha de "+nome);
-			dialog.setContentText("Insira sua nova Senha:");
 
-			Optional<String> result = dialog.showAndWait();
-			if (result.isPresent()){
-			  String senha=result.get();
-			   result = dialog.showAndWait();
-			   if (result.isPresent()){
-				   String senha2=result.get();
-				   if(senha.equals(senha2)){
-					   new UsuarioDAO().update(CPF,senha);
-					   new Alert(AlertType.INFORMATION,"Sua Senha foi Alterada com sucesso").showAndWait();
-					  
-				   }
+			   String senha=Dialogs.showInput("Modificar Senha", "Modificar Senha de "+nome, "Insira sua nova Senha:");
+			   String senha2=Dialogs.showInput("Modificar Senha", "Modificar Senha de "+nome, "Insira sua nova Senha:");
+				 
+			   if(senha.equals(senha2)){
+					   if(new UsuarioDAO().update(CPF,senha))
+						   Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Sua Senha foi Alterada com sucesso");
+					   else 
+						   Dialogs.showError("Houve algum problema na Transação", "Error", "Sua Senha não foi alterada");
 			   }
-			}
-		}
+			   }
 		
 	}
 	

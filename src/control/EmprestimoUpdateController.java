@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import VO.BibliotecaNegocio;
 import control.LivroCrudController.LivroPropriety;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -18,6 +17,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Livro;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
+import util.ValidationField;
 
 public class EmprestimoUpdateController implements Initializable {
 	@FXML	private TableColumn<LivroPropriety, String> colTitulo;
@@ -35,6 +37,8 @@ public class EmprestimoUpdateController implements Initializable {
 	
 	@FXML
 	void actionSearch(ActionEvent event) {
+		if(ValidationField.isEmptyAllFields(fieldCPF)) return;
+		
 		listItens.clear();
 		long tmp=Long.parseLong(fieldCPF.getText());
 		List<Livro> list=negocio.localizarLivro(tmp);
@@ -49,14 +53,12 @@ public class EmprestimoUpdateController implements Initializable {
 	
 	@FXML
 	void actionDevolver(ActionEvent event) throws Exception {
-		if (negocio.devolverLivro(tabela.getSelectionModel().getSelectedItem().getIsbn(), Long.parseLong(fieldCPF.getText()))) {
-				
-				System.out.println("Devolucao realizada com sucesso!");
-				
-			} else {
-				
-				System.out.println("Erro ao devolver livro.");
-			}
+		if (negocio.devolverLivro(tabela.getSelectionModel().getSelectedItem().getIsbn(), Long.parseLong(fieldCPF.getText()))) 				
+			 Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Devolucao realizada com sucesso!");
+		else 
+			 Dialogs.showError("Houve algum problema na Transação", "Error", "O livro não foi devolvido");
+
+			
 	}
 
 	@Override

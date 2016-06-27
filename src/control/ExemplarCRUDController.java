@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import DAO.LivroDAO;
-import VO.BibliotecaNegocio;
 import control.LivroCrudController.LivroPropriety;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -26,6 +25,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Livro;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
 
 public class ExemplarCRUDController implements Initializable {
 	@FXML
@@ -86,27 +87,19 @@ public class ExemplarCRUDController implements Initializable {
 	@FXML
 	
 	public void actionModificar(ActionEvent event) {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Insira a quantidade a ser somada");
-		dialog.setHeaderText("Insira a quantidade a ser somada");
+		String quantidade=Dialogs.showInput("Insira a quantidade a ser somada", "Insira a quantidade a ser somada", "");
 
-		Optional<String> result = dialog.showAndWait();
-		if (result.isPresent()){
 			int tmp = 0;
 			try {
-				tmp=Integer.parseInt(result.get());
+				tmp=Integer.parseInt(quantidade);
 				String isbn=tabela.getSelectionModel().getSelectedItem().getIsbn();
-				if(negocio.adicionarLivroEstoque(isbn, tmp)){
-					Alert alert=new Alert(AlertType.INFORMATION);
-					alert.setContentText("Quantidade alterada");
-					alert.showAndWait();
-				}
+				if(negocio.adicionarLivroEstoque(isbn, tmp))
+						 Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Quantidade alterada com sucesso");
+				else 
+						 Dialogs.showError("Houve algum problema na Transação", "Error", "A quantidade não foi alterada");
+				
 			} catch (Exception e) {
-				Alert alert=new Alert(AlertType.ERROR);
-				alert.setContentText("Valor Invalido");
-				alert.showAndWait();
-			}
-			
+				Dialogs.showError("Error", "Valor Invalido", "");
 		}
 	}
 	

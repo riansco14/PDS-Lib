@@ -3,10 +3,13 @@ package control;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import VO.BibliotecaNegocio;
+import DAO.UsuarioDAO;
 import model.Categoria;
 import model.Editora;
 import model.Livro;
+import negocio.BibliotecaNegocio;
+import util.Dialogs;
+import util.ValidationField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,6 +30,8 @@ public class LivroCadastrarController implements Initializable{
 	
 	@FXML
 	private void buttonInserir(ActionEvent event){
+		boolean fieldIsEmpty=ValidationField.isEmptyAllFields(fieldISBN,fieldAutor,fieldCategoria,fieldEditora,fieldTitle);
+		if(fieldIsEmpty) return;
 		Livro     livro     = new Livro();
 		Categoria categoria = new Categoria();
 		Editora   editora   = new Editora();
@@ -40,7 +45,11 @@ public class LivroCadastrarController implements Initializable{
 		livro.setEditora(editora);
 		livro.setCategoria(categoria);
 		
-		new BibliotecaNegocio().inserirLivro(livro, editora);
+		
+		 if(new BibliotecaNegocio().inserirLivro(livro, editora))
+			   Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Livro inserido com sucesso");
+		   else 
+			   Dialogs.showError("Houve algum problema na Transação", "Error", "Seu Livro não foi inserido");
 		
 	}
 

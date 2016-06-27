@@ -78,19 +78,6 @@
                                                 </StackPane>
       </content>
     </TitledPane>
-    <TitledPane text="Exemplar">
-      <content>
-                                                <StackPane>
-                                                   <children>
-                                                      <ListView fx:id="listViewExemplar" prefHeight="196.0" prefWidth="233.0" StackPane.alignment="CENTER">
-                                                         <StackPane.margin>
-                                                            <Insets bottom="-11.0" left="-11.0" right="-11.0" top="-11.0" />
-                                                         </StackPane.margin>
-                                                      </ListView>
-                                                   </children>
-                                                </StackPane>
-      </content>
-    </TitledPane>
                                           <TitledPane text="Emprestimo">
                                              <content>
                                                 <StackPane>
