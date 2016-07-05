@@ -25,6 +25,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -38,21 +39,22 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#actionCadastrar" prefHeight="37.0" prefWidth="153.0" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Cadastrar Usuario" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#actionCadastrar" prefHeight="37.0" prefWidth="153.0" styleClass="custem-button-input" stylesheets="@../gambar/baju.css" text="Cadastrar Usuario" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <PasswordField fx:id="fieldSenha" promptText="Digite sua Senha" GridPane.rowIndex="2">
+            <PasswordField fx:id="fieldSenha" promptText="Digite sua Senha" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </PasswordField>
-            <PasswordField fx:id="fieldSenha2" promptText="Digite sua Senha" GridPane.rowIndex="3">
+            <PasswordField fx:id="fieldSenha2" promptText="Digite sua Senha" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
             </PasswordField>
+            <TextField fx:id="fieldEmail" promptText="Digite seu Email" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

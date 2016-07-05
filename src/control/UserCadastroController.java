@@ -19,29 +19,20 @@ import util.ValidationField;
 public class UserCadastroController implements Initializable{
 	@FXML TextField fieldNome;
 	@FXML TextField fieldCPF;
+	@FXML TextField fieldEmail;
 	@FXML TextField fieldSenha;
 	@FXML TextField fieldSenha2;
 	BibliotecaNegocio negocio=new BibliotecaNegocio();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		fieldCPF.addEventFilter(KeyEvent.ANY,new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-			
-			try {
-				Integer.parseInt(event.getCharacter());
-				
-			} catch (NumberFormatException e) {
-				event.consume();
-			}
-			}
-		});
+
+        fieldCPF.addEventFilter(KeyEvent.ANY, ValidationField.getDigitEvent());
 	}
 	
 	@FXML
 	public void actionCadastrar(ActionEvent event) {
-		boolean fieldIsEmpty=ValidationField.isEmptyAllFields(fieldCPF,fieldNome,fieldSenha,fieldSenha2);
+		boolean fieldIsEmpty=ValidationField.isEmptyAllFields(fieldCPF,fieldNome,fieldSenha,fieldSenha2,fieldEmail);
 		if(fieldIsEmpty) return;
 		
 		if(fieldSenha.getText().equals(fieldSenha2.getText())){
@@ -49,6 +40,7 @@ public class UserCadastroController implements Initializable{
 			usuario.setIdUsuario(Long.parseLong(fieldCPF.getText()));
 			usuario.setNome(fieldNome.getText());
 			usuario.setSenha(fieldSenha.getText());
+			usuario.setEmail(fieldEmail.getText());
 			
 			if(negocio.cadastrarUsuario(usuario))
 				Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Usuario inserido com sucesso");
