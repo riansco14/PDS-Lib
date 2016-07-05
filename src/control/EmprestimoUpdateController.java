@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import DAO.UsuarioDAO;
 import control.LivroCrudController.LivroPropriety;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -16,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import model.Livro;
 import negocio.BibliotecaNegocio;
 import util.Dialogs;
@@ -41,6 +43,10 @@ public class EmprestimoUpdateController implements Initializable {
 		
 		listItens.clear();
 		long tmp=Long.parseLong(fieldCPF.getText());
+		if(new UsuarioDAO().localizar(tmp) == null) {
+			Dialogs.showError("Error", "Usuário inexistente", "Provavelmente não temos esse usuario cadastrado");
+			return;
+		}
 		List<Livro> list=negocio.localizarLivro(tmp);
 		
 		if(list!=null || list.size()>0){
@@ -71,6 +77,8 @@ public class EmprestimoUpdateController implements Initializable {
 		
 		
 		tabela.setItems(listItens);
+		
+		fieldCPF.addEventFilter(KeyEvent.ANY, ValidationField.getDigitEvent());
 		
 	}
 	

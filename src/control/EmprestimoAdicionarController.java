@@ -1,6 +1,7 @@
 package control;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import DAO.UsuarioDAO;
@@ -9,9 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import model.Usuario;
 import negocio.BibliotecaNegocio;
 import util.Dialogs;
+import util.SendMailTLS;
 import util.ValidationField;
 
 public class EmprestimoAdicionarController implements Initializable {
@@ -29,6 +32,8 @@ public class EmprestimoAdicionarController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		fieldCPF.addEventFilter(KeyEvent.ANY, ValidationField.getDigitEvent());
+		fieldISBN.addEventFilter(KeyEvent.ANY, ValidationField.getDigitEvent());
 	}
 
 	@FXML
@@ -47,8 +52,10 @@ public class EmprestimoAdicionarController implements Initializable {
 
 				} else {
 					if (usuario.getSenha().equals(password)) {
-						  if(negocio.retirarLivro(isbn, idUsuario))
+						  if(negocio.retirarLivro(isbn, idUsuario)){
 							   Dialogs.showInformation("Transação realizada com sucesso", "Informação", "Emprestimo realizado com sucesso");
+							   SendMailTLS.sendMail(usuario.getEmail(), usuario.getNome(), isbn, new Date());
+						  }
 						   else 
 							   Dialogs.showError("Houve algum problema na Transação", "Error", "Emprestimo não foi realizado");
 					}

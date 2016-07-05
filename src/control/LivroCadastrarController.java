@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class LivroCadastrarController implements Initializable{
 	@FXML TextField fieldISBN;
@@ -25,7 +26,7 @@ public class LivroCadastrarController implements Initializable{
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		fieldISBN.addEventFilter(KeyEvent.ANY, ValidationField.getDigitEvent());
 	}
 	
 	@FXML
