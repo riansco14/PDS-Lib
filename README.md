@@ -16,4 +16,5 @@
 <br>6. Irá aparecer uma tela de login, você irá usar o seguinte usuário
   - Login:admin
   - Pass:admin
-  
+Download Jar executável
+http://www.mediafire.com/download/0pfk5k4a31hcv9p/library.jar
